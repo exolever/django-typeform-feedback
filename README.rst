@@ -22,7 +22,7 @@ Quickstart
 
 Install django-typeform-feedback::
 
-    pip install exolever/django-typeform-feedback
+    pip install django-typeform-feedback
 
 Add it to your `INSTALLED_APPS`:
 
@@ -33,19 +33,6 @@ Add it to your `INSTALLED_APPS`:
         'typeform_feedback',
         ...
     )
-
-Add django-typeform-feedback's URL patterns:
-
-.. code-block:: python
-
-    from typeform_feedback import urls as typeform_feedback_urls
-
-
-    urlpatterns = [
-        ...
-        url(r'^', include(typeform_feedback_urls)),
-        ...
-    ]
 
 Running Tests
 -------------
