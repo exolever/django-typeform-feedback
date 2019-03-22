@@ -1,5 +1,8 @@
 [run]
 branch = true
+source=django-typeform-feedback
+include=typeform_feedback/
+
 
 [report]
 omit =
