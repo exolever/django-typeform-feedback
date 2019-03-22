@@ -30,6 +30,6 @@ deploy:
     python: 3.6
 
 after_success:
-  - coverage run --source ratings runtests.py tests
+  - coverage run --source typeform_feedback runtests.py tests
   - coverage report -m
   - codecov

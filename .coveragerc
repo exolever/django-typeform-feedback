@@ -1,6 +1,7 @@
 [run]
 branch = true
 
+
 [report]
 omit =
     *site-packages*
