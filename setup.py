@@ -32,7 +32,7 @@ setup(
     url='https://github.com/exolever/django-typeform-feedback',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["django-model-utils>=2.0", ],
+    install_requires=['django-appconf', 'django-model-utils', 'psycopg2'],
     license="MIT",
     zip_safe=False,
     keywords='django-typeform-feedback',
