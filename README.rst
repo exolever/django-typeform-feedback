@@ -14,6 +14,9 @@ django-typeform-feedback
 
 .. image:: https://codecov.io/gh/exolever/django-typeform-feedback/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/exolever/django-typeform-feedback
+    
+.. image:: https://img.shields.io/badge/License-MIT-green.svg
+   :target: https://opensource.org/licenses/MIT
 
 Your project description goes here
 
