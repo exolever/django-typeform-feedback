@@ -16,7 +16,7 @@ django-typeform-feedback
     :target: https://codecov.io/gh/exolever/django-typeform-feedback
 
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=exolever_django-typeform-feedback&metric=alert_status
-   :target: https://sonarcloud.io/dashboard?id=exolever_typeform-feedback
+   :target: https://sonarcloud.io/dashboard?id=exolever_django-typeform-feedback
     
 .. image:: https://img.shields.io/badge/License-MIT-green.svg
    :target: https://opensource.org/licenses/MIT
