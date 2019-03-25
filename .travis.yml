@@ -9,12 +9,19 @@ python: 3.6
 
 matrix:
   fast_finish: true
+  
+# Addons
+addons:
+  sonarcloud:
+    organization: "openexo"
 
 # install dependencies
 install: pip install -r requirements_test.txt
 
 # run tests on every Python version with tox
-script: tox
+script: 
+  - tox
+  - sonar-scanner
 
 # pypi deployment
 deploy:
