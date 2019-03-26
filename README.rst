@@ -21,7 +21,7 @@ django-typeform-feedback
 .. image:: https://img.shields.io/badge/License-MIT-green.svg
    :target: https://opensource.org/licenses/MIT
 
-Your project description goes here
+Use typeform as feedback with Django
 
 Quickstart
 ----------
