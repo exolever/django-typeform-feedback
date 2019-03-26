@@ -25,7 +25,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 setup(
     name='django-typeform-feedback',
     version=version,
-    description="""Your project description goes here""",
+    description="""use typeform as feedback with Django""",
     long_description=readme + '\n\n' + history,
     author='marfyl',
     author_email='jose.marfil@openexo.com',
@@ -46,6 +46,7 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: Implementation :: PyPy',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
     ],
 )
