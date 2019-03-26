@@ -37,7 +37,7 @@ setup(
     zip_safe=False,
     keywords='django-typeform-feedback',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
