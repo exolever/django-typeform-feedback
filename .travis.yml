@@ -1,39 +1,25 @@
-# Config file for automatic testing at travis-ci.org
 sudo: false
-
 language: python
-
 cache: pip
-
 python: 3.6
-
 matrix:
   fast_finish: true
-  
-# Addons
 addons:
   sonarcloud:
-    organization: "openexo"
-
-# install dependencies
+    organization: openexo
 install: pip install -r requirements_test.txt
-
-# run tests on every Python version with tox
-script: 
-  - tox
-  - sonar-scanner
-
-# pypi deployment
+script:
+- tox
+- sonar-scanner
 deploy:
   provider: pypi
-  distributions: "sdist bdist_wheel"
+  distributions: sdist bdist_wheel
   user: marfyl
-  password: 
-    secure: "TgCT0C/IuhgK9BTs1vmpJuHmyGyevwkQO5Qgb/agGKEEVlwcIdyY0R+izu5EgmjCw+0d5jW9yY/yf6CqXcZUVuWJztgDdPfCwao2+HPJASjed8ThckMl6Hy4ujPgnMhn1l1X8CwfaSg8Nz9jjpLiaWJa4pmZgVwo4axPGqC+HH2rd5q5aMfK0RuVZ2nLhRTwSjhwCfvq8ScK/qC5Y+hsZcphAXO5y8tE5JSt3g+PkPkOiBky2cvwzcrDEWm+IBvFB6jmBVch36CND4mV+7byZcVC3Chy8UwcJKVFvEdQ9Qy/inQd2DwJJVOhbfCgZEDiEKag8GUb5Fs7nVZW+e3hP9bfzt7k7m3KY5sMkjYMMmYf236xrlVSuZFIJegbqcXz3uF9Cu/2jrDQZTsWpR6j1+SbxYPpH0KsHJiOVc3wOIObl09LzYTgexRZqyHKFEeE0NU8NcD5TF9xnwQtVwqUXQCZ/2vUX7yhSXBRtPXsNGLhahMwO+xq1vuvz6l97xd5y2eFY6ihUaX4g8vCIz3BOD+vQSsf5Cx58V0jbItKlUNU7VR1GW/akToWTDYepiN0MF7x56XsAJSHqttDxO9L+YZ30KBYiIzSrkFKcudwM1+7lAvEWTmI38SPRbuGEptzJRlh1St6gR5WnRlBN056CldqOWeYEJGHatZREgLAsEc="
+  password:
+    secure: e4DYkAB2QjrVRdgXXgXm8z+2ebSG1UNjeprgl+hQ0vmeIWjA+Lm5Bjjzkr7gu1qdCZjXxdOOYHU50pHvQTLrFRvdOEyPHVfC7uoNYeB8FhMCs/6h7ByUFVZU7WGTlk1t3coexGZ3Wnu7D6MXdndmLxrtQ5/oPlISMa6g2TZ7o4bqvp19cnfW+bwrPSuJae4xcPEf6rqe87ZSbQ/FzF9RYnZZr+whKS1RrDmNXL1SHjbveujaEt+ZqLFaqF9cMkoIJmmLDEF1HGDZw7wM6XnjHQJOGER+nbN2svIZIPz88Ah8JORF5e2DJBmxV/dK6rQXNRTlvdCd3UlI1ioIYXf8ugw3CKTpNlUnwsbvxbCJ36MEsdASJx8+A5kBJMlmeeE/MsxPtN8+q/iffd0xSvinVJP1OTvUtk4bXtuJAFZO2VqluyXw3zZ1AtRNgXmJ4bxjO8XTVzuDmAl7MFlDPZrsJhxNk+e/cLYp31uCO8njyo4Pvkt3p5GcT2UkI1at65D+dtF0shWXcrKVVLuUc4VvC2j21ZvoaPMj4g4I7xisyXW3gtt9/hBw+Bomc4BR8SWnicp29Hh12hbPhtqGPF8tqzcA5WAiSmNPBOFfAOVFocGMSb3jkoNXi8P1sjI42wSNB5qfETi3TxpIy07yQWLHrBn+UssuaHQh8ki3LOOWnr0=
   on:
     tags: true
     repo: exolever/django-typeform-feedback
     python: 3.6
-
 after_success:
-  - codecov
+- codecov
