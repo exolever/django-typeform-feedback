@@ -6,7 +6,6 @@ from django.contrib.postgres.fields import JSONField
 
 from model_utils.models import TimeStampedModel
 
-from .managers import UserGenericTypeformFeedbackManager
 from .conf import settings
 
 
@@ -57,7 +56,6 @@ class UserGenericTypeformFeedback(TimeStampedModel):
         blank=False, null=False,
         choices=settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_CHOICES,
     )
-    objects = UserGenericTypeformFeedbackManager()
 
     def __str__(self):
         return '{} - {}'.format(

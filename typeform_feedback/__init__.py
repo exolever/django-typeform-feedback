@@ -1,3 +1,3 @@
 default_app_config = 'typeform_feedback.apps.TypeformFeedbackConfig'
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
