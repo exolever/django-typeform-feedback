@@ -15,7 +15,16 @@ django-typeform-feedback
 .. image:: https://codecov.io/gh/exolever/django-typeform-feedback/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/exolever/django-typeform-feedback
 
-Your project description goes here
+.. image:: https://sonarcloud.io/api/project_badges/measure?project=exolever_django-typeform-feedback&metric=alert_status
+   :target: https://sonarcloud.io/dashboard?id=exolever_django-typeform-feedback
+  
+.. image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
+   :target: https://github.com/exolever/django-typeform-feedback/issues
+    
+.. image:: https://img.shields.io/badge/License-MIT-green.svg
+   :target: https://opensource.org/licenses/MIT
+
+Use typeform as feedback with Django
 
 Quickstart
 ----------

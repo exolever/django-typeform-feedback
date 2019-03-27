@@ -10,8 +10,6 @@ Tests for `exolever/django-typeform-feedback` models module.
 
 from django.test import TestCase
 
-from typeform_feedback import models
-
 
 class TestTypeform_feedback(TestCase):
 
@@ -19,7 +17,7 @@ class TestTypeform_feedback(TestCase):
         pass
 
     def test_something(self):
-        pass
+        self.assertTrue(True)
 
     def tearDown(self):
         pass

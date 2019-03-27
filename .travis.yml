@@ -1,35 +1,25 @@
-# Config file for automatic testing at travis-ci.org
 sudo: false
-
 language: python
-
 cache: pip
-
 python: 3.6
-
 matrix:
   fast_finish: true
-
-# install dependencies
+addons:
+  sonarcloud:
+    organization: openexo
 install: pip install -r requirements_test.txt
-
-# run tests on every Python version with tox
-script: tox
-
-# pypi deployment
+script:
+- tox
+- sonar-scanner
 deploy:
   provider: pypi
-  distributions: "sdist bdist_wheel"
-  twine_version: 1.13.0
+  distributions: sdist bdist_wheel
   user: marfyl
-  password: 
-    secure: "BJBrMbhkfR82jHVlRR5z3u80qY5U3TSmRZqY++Ra4EZV1SiW3rf/aCRNo5p4mOnGRBqs4jTiCXHa4EtAMz7G0hWWFbhyjeTYkn/znm0MN/p8UwqnljgJATlV4s3tuAlqvqaD7c5SSmGzCm7okQcXhObQ9lRFVYRhQ2plQsuFlIrADjqe1yntG8ILolcURXjN4imMDHOBpsrE/WxRk/DpCYa84Oe6aAMYCe8+MF92zhziI/gN1/m0SE5KYYC/xX6FoNCVX3Zk56EnZ6ATIaqXVKY8fnT7gCBYIkEydEGxVCAyvBqmfHKYXiihJGdsqr1o7XwgdxGtBfcqS0dsNTXr+APRf8+lO6N58/07iQFhTJLgZV8RwjtUEeGXb4EqdhBCII5sOXucQgntpOic49aOpK9McBvcNok5V+BBMEIeChT1+uFAq1Cq8Hv2dx1ywoFs/qDSU9+PpWRLu5YlPnJGytpMMgVkvKp+XMhUoraZ1GgBKcQM62MAndHiPNzB2qJWbDXd5KRk2WJxDAHya0j2cB9pslQQitf291JX+hCABEjcJJzq5L31JkZR4Zr06sR1ohdoGOIRcdDDnaIKS/re5ypwUp4lN6SuhGgY+b1/Tv/s3OoSXJs+0SAMfWE69FTUh+tTcrKTSoAAMWM039YbRgYreiAK7BcKoVKs5FRML+4="
+  password:
+    secure: npcd6m0b+k+08TbauZxH2AXNFA7dOkTcYYXoY2AflAeeRgxtZA7bZ8uJdBwT0sg+A8WvSlRlu0FfS+7nb4CL6bUyFgRQJYv/0bDK5zy94w08eUvEHz6EJfnXFLuJQcbud9WlH8JfbmWhuFMscrdVwehhJadUtPYFfU2y46n5vovYheA6aG3tk7GZKWhoz7cUR8NJR8lr3BoojkSBkVVVz33sthFaZ8RGXsMB536uvgV8sYLjkKZvUBlPOFVTn113ncOwEdHAN5h1U2I2sGG9fJuqpVTZ8pqUI41heh8tYzPNCY61ga94tXlRxHDsnlLzJQ2PSuxGJuuWT5AZ5MPkTGAqep4EkCLe6XGgbbMV+ribFpNYgF3E0zFpRIWEO4K28JO4UQYlgVY/ij7B3vumJrJ/Av45D8igMCob71kyEcwXiLcxBev/bVEagp6nk70KxPVdZY90PT+dmFOpSH9ySRALRP2ytjFo1s2vu+zcKfCA4qJDc8K2+uPt6KRT/hiH26AyJNFYEdY0RhVwcwF9sABA2JoFjcf8+Ygdc5RcIsbT12qDv//yB1pOR1X05etG6TwzSGVrv899i1ZfWjYRNAqmDNZIIIfv41FdFs0eSC598G5nT3a4Tc22HtBv8n3w2SzU+4SMXfKXgJG9jfPEWpWvQ08yPnQd0lcQaIc/FBE=
   on:
     tags: true
     repo: exolever/django-typeform-feedback
     python: 3.6
-
 after_success:
-  - coverage run --source typeform_feedback runtests.py tests
-  - coverage report -m
-  - codecov
+- codecov

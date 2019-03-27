@@ -1,16 +1,14 @@
-* django-typeform-feedback version:
-* Django version:
-* Python version:
-* Operating System:
+## Problem
 
-### Description
+Explain the problem you encountered.
 
-Describe what you were trying to get done.
-Tell us what happened, what went wrong, and what you expected to happen.
+## Environment
 
-### What I Did
+- django-typeform-feedback version:
+- django version: 
+- python version: 
+- other libraries used, if any:
 
-```
-Paste the command(s) you ran and the output.
-If there was a crash, please include the traceback here.
-```
+## Code examples
+
+Give code example that demonstrates the issue, or even better, write new tests that fails because of that issue.
