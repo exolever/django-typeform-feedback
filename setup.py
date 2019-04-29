@@ -26,7 +26,7 @@ setup(
     name='django-typeform-feedback',
     version=version,
     description='Use typeform as feedback with Django',
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='marfyl',
     author_email='marfyl.dev@gmail.com',
     url='https://github.com/exolever/django-typeform-feedback',

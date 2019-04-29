@@ -71,5 +71,5 @@ class UserGenericTypeformFeedback(TimeStampedModel):
 
     def set_typeform_response(self, response):
         self.response = response
-        self.status = settings.RATINGS_USER_FEEDBACK_STATUS_DONE
+        self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DONE
         self.save(update_fields=['response', 'status', 'modified'])
