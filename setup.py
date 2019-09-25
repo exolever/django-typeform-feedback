@@ -33,10 +33,12 @@ setup(
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
     install_requires=[
+        'celery',
         'django',
         'django-appconf',
         'django-model-utils',
         'psycopg2-binary'
+        'redis',
     ],
     license="MIT",
     zip_safe=False,
