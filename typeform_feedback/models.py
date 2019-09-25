@@ -18,6 +18,13 @@ class GenericTypeformFeedback(TimeStampedModel):
         on_delete=models.CASCADE,
     )
     related_to = GenericForeignKey()
+
+    typeform_id = models.CharField(
+        max_length=56,
+        blank=True,     # Remove
+        null=True,      # Remove
+    )
+
     typeform_url = models.CharField(
         max_length=200,
         blank=True,
@@ -48,6 +55,11 @@ class UserGenericTypeformFeedback(TimeStampedModel):
         related_name='responses',
         on_delete=models.CASCADE,
     )
+    _response = JSONField(
+        default=[],
+        blank=True,
+        null=True,
+    )
     response = JSONField(
         blank=True,
         null=True)
@@ -69,7 +81,23 @@ class UserGenericTypeformFeedback(TimeStampedModel):
     def typeform_url(self):
         return self.feedback.typeform_url
 
+    @property
+    def response(self):
+        return self.first_response
+
+    @property
+    def responses(self):
+        return self._response
+
+    @property
+    def first_response(self):
+        return self._response[0] if len(self._response) > 0 else {}
+
+    @property
+    def last_response(self):
+        return self._response[-1] if len(self._response) > 0 else {}
+
     def set_typeform_response(self, response):
-        self.response = response
+        self._response.append(response)
         self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DONE
-        self.save(update_fields=['response', 'status', 'modified'])
+        self.save(update_fields=['_response', 'status', 'modified'])
