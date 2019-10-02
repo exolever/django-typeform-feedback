@@ -7,7 +7,7 @@ class GenericTypeformFeedbackAdmin(admin.ModelAdmin):
     list_filter = ('typeform_type', )
     list_display = (
         'object_id', 'content_type',
-        'typeform_url', 'typeform_type',
+        'quiz_slug', 'url', 'typeform_type',
         'created', 'modified',
     )
 

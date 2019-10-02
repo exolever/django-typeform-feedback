@@ -6,16 +6,14 @@ from django.conf import settings
 class TypeformWebhookMixin:
 
     def _get_form_response(self, response):
-        return response.get(
-            settings.TYPEFORM_WEBHOOK_LABEL_FORM_RESPONSE,
-        )
+        return response.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_FORM_RESPONSE)
 
     def _get_form_id(self, response):
-        return response.get(settings.TYPEFORM_WEBHOOK_LABEL_FORM_ID)
+        return response.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_FORM_ID)
 
     def _get_hidden(self, response):
         return response.get(
-            settings.TYPEFORM_WEBHOOK_LABEL_HIDDEN,
+            settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_HIDDEN,
         )
 
     def get_logger(self):

@@ -1,4 +1,7 @@
 import json
+import random
+import string
+import time
 
 from django.conf import settings
 
@@ -27,6 +30,15 @@ def _ensure_request(request):
 
         data = json.loads(body.decode('utf-8'))
 
-        keys_received = [_ for _ in data.keys() if _ in settings.TYPEFORM_WEBHOOK_DATA_KEYS]
-        ensured_request = len(keys_received) == len(settings.TYPEFORM_WEBHOOK_DATA_KEYS)
+        keys_received = [_ for _ in data.keys() if _ in settings.TYPEFORM_FEEDBACK_WEBHOOK_DATA_KEYS]
+        ensured_request = len(keys_received) == len(settings.TYPEFORM_FEEDBACK_WEBHOOK_DATA_KEYS)
     return ensured_request
+
+
+def random_string(string_length=20):
+    return ''.join(
+        random.SystemRandom().choice('{}{}'.format(
+            string.ascii_lowercase,
+            string.ascii_uppercase,
+        )) for _ in range(string_length)
+    )
