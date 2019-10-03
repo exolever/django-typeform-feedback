@@ -33,7 +33,7 @@ class UpdateGenericTypeformTask(TypeformWebhookMixin, Task):
 
         return generic_typeform
 
-    def get_object(self, response_from_typeform):
+    def get_user_typeform(self, response_from_typeform):
         user_typeform_response = None
         user = self.get_user(response_from_typeform)
         generic_typeform = self.get_object(response_from_typeform)
@@ -49,6 +49,6 @@ class UpdateGenericTypeformTask(TypeformWebhookMixin, Task):
     def run(self, *args, **kwargs):
         response_from_typeform = kwargs.get('response_from_typeform', {})
 
-        user_typeform_response = self.get_object(response_from_typeform)
+        user_typeform_response = self.get_user_typeform(response_from_typeform)
         if user_typeform_response:
             user_typeform_response.set_typeform_response(response_from_typeform)
