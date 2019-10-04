@@ -1,23 +1,27 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""
-test_exolever/django-typeform-feedback
-------------
-
-Tests for `exolever/django-typeform-feedback` models module.
-"""
-
 from django.test import TestCase
 
+from typeform_feedback.helpers import random_string
+from typeform_feedback.models import GenericTypeformFeedback
 
-class TestTypeform_feedback(TestCase):
+from foo.models import Foo
 
-    def setUp(self):
-        pass
 
-    def test_something(self):
-        self.assertTrue(True)
+class TestTypeformRedirectView(TestCase):
 
-    def tearDown(self):
-        pass
+    def test_create_generic_typeform(self):
+        # PREPARE DATA
+        foo = Foo(bar='bar')
+        foo.save()
+
+        # DO ACTION
+        generic_typeform = GenericTypeformFeedback.create_typeform(
+            linked_object=foo,
+            slug=random_string(),
+            typeform_id=random_string(5),
+        )
+
+        # ASSERTIONS
+        self.assertEqual(generic_typeform.related_to, foo)
+        self.assertIsNotNone(generic_typeform.quiz_slug)
+        self.assertIsNotNone(generic_typeform.url)
+        self.assertIsNotNone(generic_typeform.typeform_id)
