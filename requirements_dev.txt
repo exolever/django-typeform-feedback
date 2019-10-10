@@ -2,9 +2,10 @@ bumpversion>=0.5.3
 wheel>=0.30.0
 
 celery
-django
 django-appconf
 django-model-utils
+django-extensions
+djangorestframework
 psycopg2-binary
 requests
 

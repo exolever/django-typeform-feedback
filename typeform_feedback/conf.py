@@ -7,6 +7,7 @@ from __future__ import absolute_import, unicode_literals
 
 # python imports
 import logging
+import os
 
 # 3rd. libraries imports
 from appconf import AppConf
@@ -19,6 +20,11 @@ logger = logging.getLogger(__name__)
 
 class TypeformFeedbackConfig(AppConf):
     DEFAULT_URL = 'https://openexo.typeform.com/to/{}'
+
+    TEMPLATE_USER_VALIDATION = os.environ.get(
+        'TYPEFORM_FEEDBACK_VALIDATION_TEMPLATE',
+        'user_response_validation.html',
+    )
 
     WEBHOOK_LABEL_EVENT_ID = 'event_id'
     WEBHOOK_LABEL_FORM_ID = 'form_id'
@@ -52,12 +58,15 @@ class TypeformFeedbackConfig(AppConf):
 
     USER_FEEDBACK_STATUS_NONE = 'N'
     USER_FEEDBACK_STATUS_PENDING = 'P'
+    USER_FEEDBACK_STATUS_ANSWERED = 'A'
     USER_FEEDBACK_STATUS_DONE = 'D'
     USER_FEEDBACK_STATUS_FAIL = 'F'
+    USER_FEEDBACK_STATUS_DEFAULT = USER_FEEDBACK_STATUS_PENDING
 
     USER_FEEDBACK_STATUS_CHOICES = (
         (USER_FEEDBACK_STATUS_NONE, 'Not available'),
         (USER_FEEDBACK_STATUS_PENDING, 'Pending'),
+        (USER_FEEDBACK_STATUS_ANSWERED, 'Answered'),
         (USER_FEEDBACK_STATUS_DONE, 'Done'),
         (USER_FEEDBACK_STATUS_FAIL, 'Fail'),
     )
