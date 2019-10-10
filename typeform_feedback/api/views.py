@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins, status
+from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 
 from rest_framework.response import Response
@@ -24,7 +24,7 @@ class UserTypeformViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
 
-    @action(detail=True, methods=['post'], url_path='validate', url_name='validate')
+    @action(detail=True, methods=['post'], url_path='validate')
     def validate(self, request, uuid):
         serializer = self.get_serializer_class()(
             data={'uuid': uuid},
@@ -33,9 +33,9 @@ class UserTypeformViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.update(self.get_object(), {})
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data)
 
-    @action(detail=True, methods=['post'], url_path='invalidate', url_name='invalidate')
+    @action(detail=True, methods=['post'], url_path='invalidate')
     def invalidate(self, request, uuid):
         serializer = self.get_serializer_class()(
             data={'uuid': uuid},
@@ -44,4 +44,4 @@ class UserTypeformViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.update(self.get_object(), {})
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data)
