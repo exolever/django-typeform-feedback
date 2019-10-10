@@ -14,6 +14,7 @@ class TypeformWebhookMixin:
     def _get_hidden(self, response):
         return response.get(
             settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_HIDDEN,
+            {}
         )
 
     def get_logger(self):

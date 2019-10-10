@@ -3,6 +3,7 @@ from celery import Task
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 
 from ..models import GenericTypeformFeedback, UserGenericTypeformFeedback
 from .mixin import TypeformWebhookMixin
@@ -13,23 +14,29 @@ class UpdateGenericTypeformTask(TypeformWebhookMixin, Task):
     ignore_result = True
 
     def get_user(self, response):
+        user = None
         form_response = self._get_form_response(response)
         hidden_fields = self._get_hidden(form_response)
         user_id = hidden_fields.get(
             settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_HIDDEN_USER_FIELD,
         )
-        return get_user_model().objects.get(pk=user_id)
+        try:
+            user = get_user_model().objects.get(pk=user_id)
+        except ObjectDoesNotExist:
+            self.set_error('Typeform Response for unknown user {}'.format(user_id))
+
+        return user
 
     def get_object(self, response):
         generic_typeform = None
         form_response = self._get_form_response(response)
-
+        form_id = self._get_form_id(form_response)
         try:
             generic_typeform = GenericTypeformFeedback.objects.get(
-                typeform_id=self._get_form_id(form_response)
+                typeform_id=form_id
             )
-        except GenericTypeformFeedback.DoesNotExists:
-            pass
+        except ObjectDoesNotExist:
+            self.set_error('Typeform with id {} does not exists'.format(form_id))
 
         return generic_typeform
 
@@ -38,8 +45,8 @@ class UpdateGenericTypeformTask(TypeformWebhookMixin, Task):
         user = self.get_user(response_from_typeform)
         generic_typeform = self.get_object(response_from_typeform)
 
-        if generic_typeform:
-            user_typeform_response = UserGenericTypeformFeedback.objects.get_or_create(
+        if user and generic_typeform:
+            user_typeform_response, _ = UserGenericTypeformFeedback.objects.get_or_create(
                 user=user,
                 feedback=generic_typeform,
             )
