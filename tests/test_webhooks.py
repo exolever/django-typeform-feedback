@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
@@ -50,6 +51,14 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
 
         # ASSERTIONS
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            UserGenericTypeformFeedback.objects.get(
+                user__pk=user.pk,
+                feedback__content_type=ContentType.objects.get_for_model(foo),
+                feedback__object_id=foo.pk,
+            ).status,
+            settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_ANSWERED,
+        )
         self.assertTrue(
             UserGenericTypeformFeedback.objects.filter(
                 user__pk=user.pk,

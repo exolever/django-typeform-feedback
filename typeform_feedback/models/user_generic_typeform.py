@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import uuid
+
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
@@ -8,6 +10,11 @@ from ..conf import settings
 
 
 class UserGenericTypeformFeedback(TimeStampedModel):
+
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+    )
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -27,8 +34,8 @@ class UserGenericTypeformFeedback(TimeStampedModel):
     )
     status = models.CharField(
         max_length=1,
-        blank=False, null=False,
         choices=settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_CHOICES,
+        default=settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DEFAULT,
     )
 
     def __str__(self):
@@ -61,5 +68,13 @@ class UserGenericTypeformFeedback(TimeStampedModel):
 
     def set_typeform_response(self, response):
         self._response.append(response)
-        self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DONE
+        self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_ANSWERED
         self.save(update_fields=['_response', 'status', 'modified'])
+
+    def mark_as_approved(self):
+        self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DONE
+        self.save(update_fields=['status', 'modified'])
+
+    def mark_as_fail(self):
+        self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_FAIL
+        self.save(update_fields=['status', 'modified'])

@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sites',
     'typeform_feedback',
+    'rest_framework',
     'foo',
 ]
 
