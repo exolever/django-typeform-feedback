@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('bar', models.CharField(max_length=10)),
             ],
             options={
-                'abstract': False,
+                'abstract': False, 'verbose_name': 'Foo', 'verbose_name_plural': 'Foo',
             },
         ),
     ]
