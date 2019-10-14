@@ -21,15 +21,25 @@ logger = logging.getLogger(__name__)
 class TypeformFeedbackConfig(AppConf):
     DEFAULT_URL = 'https://openexo.typeform.com/to/{}'
 
+    # Notify all new responses if not approved
+    NOTIFICATE_ALL_USER_RESPONSES = eval(os.environ.get(
+        'TYPEFORMFEEDBACK_NOTIFICATE_ALL_RESPONSES',
+        'False',
+    ))
     TEMPLATE_USER_VALIDATION = os.environ.get(
-        'TYPEFORM_FEEDBACK_VALIDATION_TEMPLATE',
+        'TYPEFORMFEEDBACK_VALIDATION_TEMPLATE',
         'user_response_validation.html',
     )
 
     WEBHOOK_LABEL_EVENT_ID = 'event_id'
     WEBHOOK_LABEL_FORM_ID = 'form_id'
     WEBHOOK_LABEL_FORM_RESPONSE = 'form_response'
+    WEBHOOK_LABEL_QUESTIONS_DEFINITION = 'definition'
+    WEBHOOK_LABEL_QUESTIONS = 'fields'
+    WEBHOOK_LABEL_ANSWERS = 'answers'
     WEBHOOK_LABEL_EVENT_TYPE = 'event_type'
+
+    WEBHOOK_LABEL_QUESTION_TYPE_CHOICE = ['multiple_choice']
 
     WEBHOOK_DATA_KEYS = [
         WEBHOOK_LABEL_EVENT_ID,

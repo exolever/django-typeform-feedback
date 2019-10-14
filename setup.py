@@ -37,6 +37,7 @@ setup(
         'django',
         'django-appconf',
         'django-model-utils',
+        'djangorestframework',
         'psycopg2-binary',
         'redis',
     ],
