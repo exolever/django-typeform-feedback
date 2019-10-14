@@ -6,10 +6,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.urls import reverse
 
+from rest_framework import status
+
 from foo.models import Foo
 from typeform_feedback.helpers import random_string
 from typeform_feedback.models import GenericTypeformFeedback, UserGenericTypeformFeedback
-
 
 from .test_mixin import TypeformTestMixin
 
@@ -18,29 +19,12 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
 
     def test_payload_for_generic_typeform_is_stored(self):
         # PREPARE DATA
-
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        foo = Foo(bar='bar')
-        foo.save()
-
-        url = reverse('webhooks:generic-typeform')
-
-        # DO ACTION
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response_payload = self.typeform_with_hidden_fields_response_payload(
             user_pk=user.pk,
             typeform_id=generic_typeform.typeform_id,
         )
+        url = reverse('webhooks:generic-typeform')
 
         # DO ACTION
         response = self.client.post(
@@ -50,46 +34,30 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
         )
 
         # ASSERTIONS
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             UserGenericTypeformFeedback.objects.get(
                 user__pk=user.pk,
-                feedback__content_type=ContentType.objects.get_for_model(foo),
-                feedback__object_id=foo.pk,
+                feedback__content_type=ContentType.objects.get_for_model(generic_typeform.related_to),
+                feedback__object_id=generic_typeform.related_to.pk,
             ).status,
             settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_ANSWERED,
         )
         self.assertTrue(
             UserGenericTypeformFeedback.objects.filter(
                 user__pk=user.pk,
-                feedback__content_type=ContentType.objects.get_for_model(foo),
-                feedback__object_id=foo.pk,
+                feedback__content_type=ContentType.objects.get_for_model(generic_typeform.related_to),
+                feedback__object_id=generic_typeform.related_to.pk,
             ).exists()
         )
 
     def test_payload_for_unknown_form_is_ignored(self):
         # PREPARE DATA
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        foo = Foo(bar='bar')
-        foo.save()
-
-        url = reverse('webhooks:generic-typeform')
-
-        # DO ACTION
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response_payload = self.typeform_with_hidden_fields_response_payload(
             user_pk=user.pk,
         )
+        url = reverse('webhooks:generic-typeform')
 
         # DO ACTION
         response = self.client.post(
@@ -99,34 +67,24 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
         )
 
         # ASSERTIONS
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(
             UserGenericTypeformFeedback.objects.filter(
                 user__pk=user.pk,
-                feedback__content_type=ContentType.objects.get_for_model(foo),
-                feedback__object_id=foo.pk,
+                feedback__content_type=ContentType.objects.get_for_model(generic_typeform.related_to),
+                feedback__object_id=generic_typeform.related_to.pk,
             ).exists()
         )
 
     def test_payload_for_unknown_user_is_ignored(self):
         # PREPARE DATA
         unexistsing_user_pk = '9999999999'
-        foo = Foo(bar='bar')
-        foo.save()
-
-        url = reverse('webhooks:generic-typeform')
-
-        # DO ACTION
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        _, generic_typeform = self.create_base_context()
         user_response_payload = self.typeform_with_hidden_fields_response_payload(
             user_pk=unexistsing_user_pk,
             typeform_id=generic_typeform.typeform_id,
         )
+        url = reverse('webhooks:generic-typeform')
 
         # DO ACTION
         response = self.client.post(
@@ -136,12 +94,12 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
         )
 
         # ASSERTIONS
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(
             UserGenericTypeformFeedback.objects.filter(
                 user__pk=unexistsing_user_pk,
-                feedback__content_type=ContentType.objects.get_for_model(foo),
-                feedback__object_id=foo.pk,
+                feedback__content_type=ContentType.objects.get_for_model(generic_typeform.related_to),
+                feedback__object_id=generic_typeform.related_to.pk,
             ).exists()
         )
 
@@ -158,4 +116,4 @@ class TestTypeformWebhooks(TypeformTestMixin, TestCase):
         )
 
         # ASSERTIONS
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

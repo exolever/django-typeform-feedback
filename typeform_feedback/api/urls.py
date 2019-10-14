@@ -10,8 +10,5 @@ router = DefaultRouter()
 router.register(r'', UserTypeformViewSet, base_name='action')
 
 urlpatterns = [
-    url(
-        r'^action/',
-        include(router.urls)
-    ),
+    url(r'^action/', include(router.urls)),
 ]

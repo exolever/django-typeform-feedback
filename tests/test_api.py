@@ -10,8 +10,6 @@ from rest_framework import status
 from typeform_feedback.helpers import random_string
 from typeform_feedback.models import GenericTypeformFeedback, UserGenericTypeformFeedback
 
-from foo.models import Foo
-
 from .test_mixin import TypeformTestMixin
 
 
@@ -19,20 +17,7 @@ class TestAPI(TypeformTestMixin, TestCase):
 
     def test_action_validate_pending_user_response(self):
         # PREPARE DATA
-        foo = Foo(bar='bar')
-        foo.save()
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response = UserGenericTypeformFeedback(
             feedback=generic_typeform,
             user=user,
@@ -56,20 +41,7 @@ class TestAPI(TypeformTestMixin, TestCase):
 
     def test_action_validate_user_response(self):
         # PREPARE DATA
-        foo = Foo(bar='bar')
-        foo.save()
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response = UserGenericTypeformFeedback(
             feedback=generic_typeform,
             user=user,
@@ -99,20 +71,7 @@ class TestAPI(TypeformTestMixin, TestCase):
 
     def test_action_validate_previous_failed_response_for_user(self):
         # PREPARE DATA
-        foo = Foo(bar='bar')
-        foo.save()
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response = UserGenericTypeformFeedback(
             feedback=generic_typeform,
             user=user,
@@ -144,20 +103,7 @@ class TestAPI(TypeformTestMixin, TestCase):
 
     def test_action_invalidate_user_response(self):
         # PREPARE DATA
-        foo = Foo(bar='bar')
-        foo.save()
-        user = get_user_model()(
-            username='testuser',
-            email='user@example.com',
-        )
-        user.save()
-
-        generic_typeform = GenericTypeformFeedback.create_typeform(
-            linked_object=foo,
-            slug=random_string(),
-            typeform_id=random_string(5),
-        )
-
+        user, generic_typeform = self.create_base_context()
         user_response = UserGenericTypeformFeedback(
             feedback=generic_typeform,
             user=user,
