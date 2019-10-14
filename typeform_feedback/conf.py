@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 class TypeformFeedbackConfig(AppConf):
     DEFAULT_URL = 'https://openexo.typeform.com/to/{}'
 
-    # Notificate all new responses if not approved
+    # Notify all new responses if not approved
     NOTIFICATE_ALL_USER_RESPONSES = eval(os.environ.get(
         'TYPEFORMFEEDBACK_NOTIFICATE_ALL_RESPONSES',
         'False',
