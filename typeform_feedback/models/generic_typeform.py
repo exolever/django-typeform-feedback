@@ -55,6 +55,10 @@ class GenericTypeformFeedback(TimeStampedModel):
         new_typeform.save()
         return new_typeform
 
+    @property
+    def typeform_url(self):
+        return self.url
+
     def set_url(self, url):
         self.url = url
         self.save(update_fields=['url', 'modified'])

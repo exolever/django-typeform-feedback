@@ -46,9 +46,6 @@ class UserGenericTypeformFeedback(TimeStampedModel):
             self.user, self.feedback,
         )
 
-    def get_project(self):
-        return self.feedback.related_to.first().project
-
     @property
     def url(self):
         return self.feedback.url

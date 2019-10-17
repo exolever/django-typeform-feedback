@@ -5,14 +5,10 @@ License boilerplate should be used here.
 # python 3 imports
 from __future__ import absolute_import, unicode_literals
 
-# python imports
 import logging
-import os
 
-# 3rd. libraries imports
 from appconf import AppConf
 
-# django imports
 from django.conf import settings  # noqa
 
 logger = logging.getLogger(__name__)
@@ -22,11 +18,13 @@ class TypeformFeedbackConfig(AppConf):
     DEFAULT_URL = 'https://openexo.typeform.com/to/{}'
 
     # Notify all new responses if not approved
-    NOTIFICATE_ALL_USER_RESPONSES = eval(os.environ.get(
+    NOTIFICATE_ALL_USER_RESPONSES = getattr(
+        settings,
         'TYPEFORMFEEDBACK_NOTIFICATE_ALL_RESPONSES',
-        'False',
-    ))
-    TEMPLATE_USER_VALIDATION = os.environ.get(
+        False,
+    )
+    TEMPLATE_USER_VALIDATION = getattr(
+        settings,
         'TYPEFORMFEEDBACK_VALIDATION_TEMPLATE',
         'user_response_validation.html',
     )
