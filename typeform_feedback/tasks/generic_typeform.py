@@ -1,7 +1,6 @@
 from celery import Task
 
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 

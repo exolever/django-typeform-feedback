@@ -1,7 +1,6 @@
 import json
 import random
 import string
-import time
 
 from django.conf import settings
 

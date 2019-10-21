@@ -78,4 +78,3 @@ class TypeformFeedbackConfig(AppConf):
         (USER_FEEDBACK_STATUS_DONE, 'Done'),
         (USER_FEEDBACK_STATUS_FAIL, 'Fail'),
     )
-
