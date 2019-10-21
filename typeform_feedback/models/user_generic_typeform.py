@@ -139,4 +139,3 @@ class UserGenericTypeformFeedback(TimeStampedModel):
     def mark_as_fail(self):
         self.status = settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_FAIL
         self.save(update_fields=['status', 'modified'])
-
