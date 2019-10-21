@@ -17,7 +17,6 @@ class TypeformMixin:
             feedback__typeform_id=typeform_id,
         )
 
-
     def get_user_answers(self, user, typeform_id):
         return self.get_answers(typeform_id).filter(
             user=user,

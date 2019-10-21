@@ -372,7 +372,7 @@ class TypeformTestMixin:
                     },
                     {
                         "type": "file_url",
-                        "file_url": "https://api.typeform.com/responses/files/eaa300fe943a27e34c084b9b7c79d88b18d41f4efbb22c35e297dcaa27eebfd7/blank.pdf",
+                        "file_url": "https://api.typeform.com/responses/files/eaa300fe943a27e34c084b9b7c79d88b18d41f4efbb22c35e297dcaa27eebfd7/blank.pdf",   # noqa
                         "field": {
                             "id": "NEHPCi9Wy5PG",
                             "type": "file_upload",

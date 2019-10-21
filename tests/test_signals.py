@@ -89,8 +89,6 @@ class TestTypeformSignals(TypeformTestMixin, TestCase):
     @patch('typeform_feedback.signals_define.user_response_approved.send')
     def test_signal_sended_when_an_user_response_is_approved(self, response_approved_signal):
         # PREPARE DATA
-        url = reverse('webhooks:generic-typeform')
-
         user, generic_typeform = self.create_base_context()
         user_response = UserGenericTypeformFeedback(
             feedback=generic_typeform,
