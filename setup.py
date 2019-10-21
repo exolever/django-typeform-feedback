@@ -38,7 +38,7 @@ setup(
         'django-appconf',
         'django-model-utils',
         'djangorestframework',
-        'psycopg2-binary',
+        'psycopg2',
         'redis',
     ],
     license="MIT",
