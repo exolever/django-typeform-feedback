@@ -1,16 +1,13 @@
 import json
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.urls import reverse
 
 from rest_framework import status
 
-from foo.models import Foo
-from typeform_feedback.helpers import random_string
-from typeform_feedback.models import GenericTypeformFeedback, UserGenericTypeformFeedback
+from typeform_feedback.models import UserGenericTypeformFeedback
 
 from .test_mixin import TypeformTestMixin
 

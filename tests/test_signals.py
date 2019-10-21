@@ -6,10 +6,8 @@ from django.urls import reverse
 
 from mock import patch
 
-from typeform_feedback.helpers import random_string
 from typeform_feedback.models import (
     UserGenericTypeformFeedback,
-    GenericTypeformFeedback,
 )
 
 from .test_mixin import TypeformTestMixin
@@ -87,7 +85,6 @@ class TestTypeformSignals(TypeformTestMixin, TestCase):
         self.assertFalse(settings.TYPEFORM_FEEDBACK_NOTIFICATE_ALL_USER_RESPONSES)
         self.assertEqual(len(user_response.responses), 2)
         self.assertEqual(new_response_signal.call_count, 1)
-
 
     @patch('typeform_feedback.signals_define.user_response_approved.send')
     def test_signal_sended_when_an_user_response_is_approved(self, response_approved_signal):

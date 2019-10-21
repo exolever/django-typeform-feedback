@@ -31,7 +31,7 @@ class TypeformTestMixin:
         return user, generic_typeform
 
     def typeform_with_hidden_fields_response_payload(self, user_pk, typeform_id=None):
-        typeform_code = typeform_id or  random_string(5)
+        typeform_code = typeform_id or random_string(5)
 
         return {
             'event_id': '01DNPVTH0DHXGKX5PFA073K3AM',
@@ -74,9 +74,8 @@ class TypeformTestMixin:
             }
         }
 
-
     def typeform_without_hidden_fields_response_payload(self, typeform_id=None):
-        typeform_code = typeform_id or  random_string(5)
+        typeform_code = typeform_id or random_string(5)
 
         return {
             'event_id': '01DNPTRY6HV49ZZXY4B11CWZ3Y',
@@ -114,7 +113,7 @@ class TypeformTestMixin:
         }
 
     def all_type_questions_payload(self, user_pk, typeform_id=None):
-        typeform_code = typeform_id or  random_string(5)
+        typeform_code = typeform_id or random_string(5)
 
         return {
             "event_id": "01DQ4RFCJ3FYW3TJH5E845ETDC",
