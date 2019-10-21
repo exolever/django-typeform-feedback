@@ -1,19 +1,15 @@
-import json
-
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 
 from rest_framework import status
+from rest_framework.test import APITestCase
 
-from typeform_feedback.helpers import random_string
-from typeform_feedback.models import GenericTypeformFeedback, UserGenericTypeformFeedback
+from typeform_feedback.models import UserGenericTypeformFeedback
 
 from .test_mixin import TypeformTestMixin
 
 
-class TestAPI(TypeformTestMixin, TestCase):
+class TestAPI(TypeformTestMixin, APITestCase):
 
     def test_action_validate_pending_user_response(self):
         # PREPARE DATA
@@ -27,7 +23,7 @@ class TestAPI(TypeformTestMixin, TestCase):
         # DO ACTION
         response = self.client.post(
             reverse('api:action-validate', kwargs={'uuid': user_response.uuid}),
-            data=json.dumps({}),
+            data={},
             content_type='application/json',
         )
 
@@ -57,7 +53,7 @@ class TestAPI(TypeformTestMixin, TestCase):
         # DO ACTION
         response = self.client.post(
             reverse('api:action-validate', kwargs={'uuid': user_response.uuid}),
-            data=json.dumps({}),
+            data={},
             content_type='application/json',
         )
 
@@ -88,7 +84,7 @@ class TestAPI(TypeformTestMixin, TestCase):
         # DO ACTION
         response = self.client.post(
             reverse('api:action-validate', kwargs={'uuid': user_response.uuid}),
-            data=json.dumps({}),
+            data={},
             content_type='application/json',
         )
 
@@ -99,7 +95,6 @@ class TestAPI(TypeformTestMixin, TestCase):
             user_response.status,
             settings.TYPEFORM_FEEDBACK_USER_FEEDBACK_STATUS_DONE,
         )
-
 
     def test_action_invalidate_user_response(self):
         # PREPARE DATA
@@ -119,7 +114,7 @@ class TestAPI(TypeformTestMixin, TestCase):
         # DO ACTION
         response = self.client.post(
             reverse('api:action-invalidate', kwargs={'uuid': user_response.uuid}),
-            data=json.dumps({}),
+            data={},
             content_type='application/json',
         )
 
