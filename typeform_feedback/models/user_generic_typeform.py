@@ -77,11 +77,11 @@ class UserGenericTypeformFeedback(TimeStampedModel):
         parsed_response = []
 
         form_body = response.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_FORM_RESPONSE)
-        questions_definition = form_body.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_QUESTIONS_DEFINITION)
-        questions = questions_definition.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_QUESTIONS)
+        questions_definition = form_body.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_QUESTIONS_DEFINITION, {})
+        questions = questions_definition.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_QUESTIONS, [])
         answers = {
             _.get('field').get('id'): _
-            for _ in form_body.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_ANSWERS)
+            for _ in form_body.get(settings.TYPEFORM_FEEDBACK_WEBHOOK_LABEL_ANSWERS, [])
         }
 
         for question in questions:
