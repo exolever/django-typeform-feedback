@@ -48,7 +48,6 @@ class TestTypeformRedirectView(TypeformTestMixin, TestCase):
             response.url
         )
         self.assertTrue('user_id={}'.format(user.pk) in response.url)
-        print(response.url)
 
     def test_mark_user_response_as_approved(self):
         user, generic_typeform = self.create_base_context()
