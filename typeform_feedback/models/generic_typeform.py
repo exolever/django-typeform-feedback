@@ -50,7 +50,7 @@ class GenericTypeformFeedback(TimeStampedModel):
             object_id=linked_object.pk,
             quiz_slug=slug,
             typeform_id=typeform_id,
-            url=kwargs.get('url', settings.TYPEFORM_FEEDBACK_DEFAULT_URL.format(typeform_id))
+            url=kwargs.get('url', None) or settings.TYPEFORM_FEEDBACK_DEFAULT_URL.format(typeform_id)
         )
         new_typeform.save()
         return new_typeform

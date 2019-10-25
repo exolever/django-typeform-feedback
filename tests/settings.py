@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
+    'django.contrib.sessions',
     'typeform_feedback',
     'rest_framework',
     'foo',
@@ -38,10 +39,16 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+MIDDLEWARES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+)
+
 if django.VERSION >= (1, 10):
-    MIDDLEWARE = ()
+    MIDDLEWARE = MIDDLEWARES
 else:
-    MIDDLEWARE_CLASSES = ()
+    MIDDLEWARE_CLASSES = MIDDLEWARES
 
 TEMPLATES = [
     {
