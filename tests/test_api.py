@@ -145,8 +145,8 @@ class TestAPI(TypeformTestMixin, APITestCase):
             response.json(),
             {'url': '{}?user_id={}'.format(
                 settings.TYPEFORM_FEEDBACK_DEFAULT_URL.format(generic_typeform.typeform_id),
-                user.pk)
-            }
+                user.pk
+            )}
         )
 
     def test_get_typeform_url_for_not_real_typeform(self):
@@ -175,6 +175,6 @@ class TestAPI(TypeformTestMixin, APITestCase):
             response.json(),
             {'url': '{}?user_id={}'.format(
                 generic_typeform.url,
-                user.pk)
-            }
+                user.pk
+            )}
         )
