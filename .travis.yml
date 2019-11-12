@@ -1,16 +1,25 @@
 sudo: false
+dist: xenial
 language: python
 cache: pip
-python: 3.6
+python:
+python:
+  - "3.7"
+  - "3.6"
 matrix:
   fast_finish: true
+services:
+  - postgresql
+  - redis-server
 addons:
   sonarcloud:
     organization: openexo
-install: pip install -r requirements_test.txt
+install:
+  - pip install -r requirements_test.txt
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
-- tox
-- sonar-scanner
+  - tox
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
@@ -22,4 +31,4 @@ deploy:
     repo: exolever/django-typeform-feedback
     python: 3.6
 after_success:
-- codecov
+  - codecov
