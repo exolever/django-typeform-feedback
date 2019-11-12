@@ -3,8 +3,8 @@ from rest_framework.decorators import action
 
 from rest_framework.response import Response
 
-from ..models import UserGenericTypeformFeedback
-from .serializers import (
+from ...models import UserGenericTypeformFeedback
+from ..serializers import (
     UserResponseValidationSerializer,
     UserResponseOKSerializer,
     UserResponseKOSerializer,

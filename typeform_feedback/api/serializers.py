@@ -3,7 +3,7 @@ from django.conf import settings
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from ..models import UserGenericTypeformFeedback
+from ..models import UserGenericTypeformFeedback, GenericTypeformFeedback
 
 
 class UserResponseValidationSerializer(serializers.ModelSerializer):
@@ -37,3 +37,18 @@ class UserResponseKOSerializer(UserResponseValidationSerializer):
 
     def update(self, instance, validated_data):
         instance.mark_as_fail()
+
+
+class GenericTypeformUrlSerializer(serializers.ModelSerializer):
+
+    url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = GenericTypeformFeedback
+        fields = ['url']
+
+    def get_url(self, obj):
+        return '{}?user_id={}'.format(
+            obj.url,
+            self.context.get('request').user.pk
+        )
