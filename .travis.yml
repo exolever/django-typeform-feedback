@@ -20,7 +20,6 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - tox
-  - sonar-scanner
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
