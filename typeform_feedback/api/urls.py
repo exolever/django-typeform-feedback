@@ -7,7 +7,7 @@ from .views import UserTypeformViewSet, GenericTypeformApiView
 app_name = 'typeform_feedback'
 
 router = DefaultRouter()
-router.register(r'', UserTypeformViewSet, base_name='action')
+router.register(r'', UserTypeformViewSet, basename='action')
 
 urlpatterns = [
     url(r'^action/', include(router.urls)),
